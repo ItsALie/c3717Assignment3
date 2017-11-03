@@ -21,15 +21,32 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Events extends AppCompatActivity {
+    myDbAdapter helper;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
+        ListView listOfEvents = (ListView) findViewById(R.id.list_events);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
+
+        helper = new myDbAdapter(this);
+        System.out.println(helper.getData());
+
+        List<String> itemList = Arrays.asList(helper.getData().split("\n"));
+        System.out.println(itemList);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
+        listOfEvents.setAdapter(arrayAdapter);
     }
 
     @Override
