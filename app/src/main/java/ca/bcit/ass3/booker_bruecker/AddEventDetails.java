@@ -14,7 +14,6 @@ public class AddEventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_details);
         helper = new myDbAdapter(this);
-        //helper.isTableExists("EVENT_DETAILS", true);
         Toast.makeText(getApplicationContext(), "" + helper.isTableExists("EVENT_DETAILS", true), Toast.LENGTH_LONG).show();
     }
 
@@ -25,13 +24,14 @@ public class AddEventDetails extends AppCompatActivity {
         helper = new myDbAdapter(getApplicationContext());
         Intent intent = getIntent();
         String eventID  = intent.getStringExtra("EventID");
-        if(name.getText() == null || unit.getText() == null || quantity.getText() == null)
+        Toast.makeText(getApplicationContext(), "" + eventID, Toast.LENGTH_LONG).show();
+        if(name.getText() == null || unit.getText() == null || quantity.getText() == null || eventID == null)
         {
             Toast.makeText(getApplicationContext(), "Enter Both Name and Date and Time", Toast.LENGTH_LONG).show();
         }
         else
         {
-            long id = helper.insertEventDetails(name.getText().toString(),unit.getText().toString(), quantity.getText().toString());
+            long id = helper.insertEventDetails(name.getText().toString(),unit.getText().toString(), quantity.getText().toString(), eventID);
             if(id<=0)
             {
                 Toast.makeText(getApplicationContext(), "Insertion Unsuccessful", Toast.LENGTH_LONG).show();

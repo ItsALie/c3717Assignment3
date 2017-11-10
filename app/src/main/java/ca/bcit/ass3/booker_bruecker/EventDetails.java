@@ -17,6 +17,7 @@ import java.util.List;
 
 public class EventDetails extends AppCompatActivity {
     myDbAdapter helper;
+    Intent prevIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,7 @@ public class EventDetails extends AppCompatActivity {
         this.setSupportActionBar(toolbar);
 
         ListView listOfEvents = (ListView) findViewById(R.id.list_event_details);
+        prevIntent = getIntent();
 
         helper = new myDbAdapter(this);
 
@@ -58,7 +60,6 @@ public class EventDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_event_details:
-                Intent prevIntent = getIntent();
                 Intent i = new Intent(EventDetails.this, AddEventDetails.class);
                 i.putExtra("EventID", prevIntent.getStringExtra("EventID"));
                 startActivity(i);
