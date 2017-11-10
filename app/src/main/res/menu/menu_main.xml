@@ -6,10 +6,12 @@
         android:id="@+id/add_event"
         android:checkable="false"
         android:orderInCategory="1"
+        android:icon="@drawable/staricon"
         android:title="Add Events"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/search_events"
+        android:icon="@drawable/magnifyericon"
         android:title="Search"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
