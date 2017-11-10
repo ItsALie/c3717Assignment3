@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,8 +46,8 @@ public class Events extends AppCompatActivity {
         final List<String> itemList = Arrays.asList(helper.getData().split("\n"));
         System.out.println(itemList);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
-        listOfEvents.setAdapter(arrayAdapter);
+        myCustomAdapter adapter = new myCustomAdapter(itemList, this);
+        listOfEvents.setAdapter(adapter);
 
         listOfEvents.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -54,7 +55,6 @@ public class Events extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
                 String itemname = itemList.get(position);
-                Toast.makeText(Events.this, "" + itemname.charAt(0), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Events.this, EventDetails.class);
                 i.putExtra("EventID", "" + itemname.charAt(0));
                 startActivity(i);

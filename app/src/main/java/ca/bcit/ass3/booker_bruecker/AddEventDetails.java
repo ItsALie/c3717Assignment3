@@ -23,7 +23,6 @@ public class AddEventDetails extends AppCompatActivity {
         helper = new myDbAdapter(getApplicationContext());
         Intent intent = getIntent();
         String eventID  = intent.getStringExtra("EventID");
-        Toast.makeText(getApplicationContext(), "" + eventID, Toast.LENGTH_LONG).show();
         if(name.getText() == null || unit.getText() == null || quantity.getText() == null || eventID == null)
         {
             Toast.makeText(getApplicationContext(), "Enter Both Name and Date and Time", Toast.LENGTH_LONG).show();
@@ -44,6 +43,7 @@ public class AddEventDetails extends AppCompatActivity {
         }
 
         Intent i = new Intent(this, EventDetails.class);
+        i.putExtra("EventID", eventID);
         startActivity(i);
     }
 }
