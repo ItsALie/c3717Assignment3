@@ -14,7 +14,6 @@ public class AddEventDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_details);
         helper = new myDbAdapter(this);
-        Toast.makeText(getApplicationContext(), "" + helper.isTableExists("EVENT_DETAILS", true), Toast.LENGTH_LONG).show();
     }
 
     public void onAdd(View v){
