@@ -49,12 +49,13 @@ public class myDbAdapter {
         return id;
     }
 
-    public long insertEventDetails(String name, String unit, String quantity) {
+    public long insertEventDetails(String name, String unit, String quantity, String eventID) {
         SQLiteDatabase dbb = myhelper.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(myDbHelper.ITEM_NAME, name);
         contentValues.put(myDbHelper.ITEM_UNIT, unit);
         contentValues.put(myDbHelper.ITEM_QUAN, quantity);
+        contentValues.put(myDbHelper.EVENT_ID, eventID);
         long id = dbb.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
         return id;
     }
@@ -87,6 +88,7 @@ public class myDbAdapter {
             String quantity = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_QUAN));
             buffer.append(cid + "   " + name + "   " + unit + " " + quantity + " \n");
         }
+        System.out.println(buffer.toString());
         return buffer.toString();
     }
 

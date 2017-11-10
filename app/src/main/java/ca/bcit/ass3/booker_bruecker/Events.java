@@ -56,7 +56,7 @@ public class Events extends AppCompatActivity {
                 String itemname = itemList.get(position);
                 Toast.makeText(Events.this, "" + itemname.charAt(0), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Events.this, EventDetails.class);
-                i.putExtra("EventID", itemname.charAt(0));
+                i.putExtra("EventID", "" + itemname.charAt(0));
                 startActivity(i);
             }
         });
