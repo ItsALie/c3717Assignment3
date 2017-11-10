@@ -15,8 +15,32 @@ public class myDbAdapter {
         myhelper = new myDbHelper(context);
     }
 
+    public boolean isTableExists(String tableName, boolean openDb) {
+        SQLiteDatabase dbb = myhelper.getReadableDatabase();
+        if(openDb) {
+            if(dbb == null || !dbb.isOpen()) {
+                dbb = myhelper.getReadableDatabase();
+            }
+
+            if(!dbb.isReadOnly()) {
+                dbb.close();
+                dbb = myhelper.getReadableDatabase();
+            }
+        }
+
+        Cursor cursor = dbb.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
+        if(cursor!=null) {
+            if(cursor.getCount()>0) {
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+        }
+        return false;
+    }
+
     public long insertEvent(String name, String date, String time) {
-        SQLiteDatabase dbb = myhelper.getWritableDatabase();
+        SQLiteDatabase dbb = myhelper.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(myDbHelper.NAME, name);
         contentValues.put(myDbHelper.DATE, date);
@@ -25,8 +49,18 @@ public class myDbAdapter {
         return id;
     }
 
+    public long insertEventDetails(String name, String unit, String quantity) {
+        SQLiteDatabase dbb = myhelper.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(myDbHelper.ITEM_NAME, name);
+        contentValues.put(myDbHelper.ITEM_UNIT, unit);
+        contentValues.put(myDbHelper.ITEM_QUAN, quantity);
+        long id = dbb.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+        return id;
+    }
+
     public String getData() {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
+        SQLiteDatabase db = myhelper.getReadableDatabase();
         String[] columns = {myDbHelper.UID, myDbHelper.NAME, myDbHelper.DATE, myDbHelper.TIME};
         Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, null, null, null, null, null);
         StringBuffer buffer = new StringBuffer();
@@ -36,6 +70,22 @@ public class myDbAdapter {
             String date = cursor.getString(cursor.getColumnIndex(myDbHelper.DATE));
             String time = cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
             buffer.append(cid + "   " + name + "   " + date + " " + time + " \n");
+        }
+        return buffer.toString();
+    }
+
+    public String getDetailData() {
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_NAME, myDbHelper.ITEM_UNIT, myDbHelper.ITEM_QUAN};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, null, null, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            int cid = cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));
+            String name = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_NAME));
+            String unit = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_UNIT));
+            String quantity = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_QUAN));
+            buffer.append(cid + "   " + name + "   " + unit + " " + quantity + " \n");
         }
         return buffer.toString();
     }
@@ -61,21 +111,26 @@ public class myDbAdapter {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name
         private static final String TABLE_NAME_DETAILS = "EVENT_DETAILS";   // Table Name
-        private static final int DATABASE_Version = 1;    // Database Version
+        private static final int DATABASE_Version = 6;    // Database Version
+
         private static final String UID = "_id";     // Column I (Primary Key)
         private static final String NAME = "Name";    //Column II
         private static final String DATE = "Date";    // Column III
         private static final String TIME = "Time";    // Column IV
+
         private static final String  ITEM_NAME= "ItemName";    //Column I
         private static final String ITEM_UNIT = "ItemUnit";    //Column II
         private static final String ITEM_QUAN = "ItemQuantity";    //Column III
         private static final String EVENT_ID = "eventID";    //Column II
+
         private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " VARCHAR(255) ," + DATE + " VARCHAR(255) ," + TIME + " VARCHAR(225));";
         private static final String CREATE_TABLE_DETAIL = "CREATE TABLE " + TABLE_NAME_DETAILS +
-                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ITEM_NAME + " VARCHAR(255) ," + ITEM_UNIT + " VARCHAR(255) ," + ITEM_QUAN + " VARCHAR(225) ," + EVENT_ID + " INTEGER, FOREIGN KEY (\"+ EVENT_ID +\") REFERENCES \"+TABLE_NAME+\"(\"+UID+\"));\"";
+                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ITEM_NAME + " VARCHAR(255) ," + ITEM_UNIT + " VARCHAR(255) ," + ITEM_QUAN + " VARCHAR(225) ," + EVENT_ID + " INTEGER);";
+
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
         private static final String DROP_TABLE_DETAILS = "DROP TABLE IF EXISTS " + TABLE_NAME_DETAILS;
+
         private Context context;
 
         public myDbHelper(Context context) {
