@@ -32,7 +32,7 @@ public class EventDetails extends AppCompatActivity {
 
         helper = new myDbAdapter(this);
 
-        /*List<String> itemList = Arrays.asList(helper.getDetailData().split("\n"));
+        List<String> itemList = Arrays.asList(helper.getDetailData().split("\n"));
         System.out.println(itemList);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
@@ -45,7 +45,7 @@ public class EventDetails extends AppCompatActivity {
             {
                 Toast.makeText(EventDetails.this, "" + position, Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
     }
 
     @Override

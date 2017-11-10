@@ -88,6 +88,7 @@ public class myDbAdapter {
             String quantity = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_QUAN));
             buffer.append(cid + "   " + name + "   " + unit + " " + quantity + " \n");
         }
+        System.out.println(buffer.toString());
         return buffer.toString();
     }
 
