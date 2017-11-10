@@ -43,6 +43,7 @@ public class AddEventDetails extends AppCompatActivity {
         }
 
         Intent i = new Intent(this, EventDetails.class);
+        i.putExtra("EventID", eventID);
         startActivity(i);
     }
 }
