@@ -54,7 +54,6 @@ public class Events extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
                 String itemname = itemList.get(position);
-                Toast.makeText(Events.this, "" + itemname.charAt(0), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(Events.this, EventDetails.class);
                 i.putExtra("EventID", "" + itemname.charAt(0));
                 startActivity(i);
