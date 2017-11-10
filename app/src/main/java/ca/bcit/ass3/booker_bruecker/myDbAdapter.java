@@ -75,10 +75,13 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
-    public String getDetailData() {
+    public String getDetailData(String eventID) {
+        String[] whereArgs = new String[] {
+                eventID
+        };
         SQLiteDatabase db = myhelper.getReadableDatabase();
-        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_NAME, myDbHelper.ITEM_UNIT, myDbHelper.ITEM_QUAN};
-        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, null, null, null, null, null, null);
+        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_NAME, myDbHelper.ITEM_UNIT, myDbHelper.ITEM_QUAN, myDbHelper.EVENT_ID};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, columns, myDbHelper.EVENT_ID + "=?", whereArgs, null, null, null, null);
         StringBuffer buffer = new StringBuffer();
 
         while (cursor.moveToNext()) {
