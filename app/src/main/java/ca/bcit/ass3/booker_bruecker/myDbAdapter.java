@@ -111,7 +111,7 @@ public class myDbAdapter {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name
         private static final String TABLE_NAME_DETAILS = "EVENT_DETAILS";   // Table Name
-        private static final int DATABASE_Version = 6;    // Database Version
+        private static final int DATABASE_Version = 8;    // Database Version
 
         private static final String UID = "_id";     // Column I (Primary Key)
         private static final String NAME = "Name";    //Column II
@@ -126,7 +126,7 @@ public class myDbAdapter {
         private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
                 " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NAME + " VARCHAR(255) ," + DATE + " VARCHAR(255) ," + TIME + " VARCHAR(225));";
         private static final String CREATE_TABLE_DETAIL = "CREATE TABLE " + TABLE_NAME_DETAILS +
-                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ITEM_NAME + " VARCHAR(255) ," + ITEM_UNIT + " VARCHAR(255) ," + ITEM_QUAN + " VARCHAR(225) ," + EVENT_ID + " INTEGER);";
+                " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ITEM_NAME + " VARCHAR(255) ," + ITEM_UNIT + " VARCHAR(255) ," + ITEM_QUAN + " VARCHAR(225) ," + EVENT_ID + " INTEGER, " + " FOREIGN KEY ("+EVENT_ID+") REFERENCES "+TABLE_NAME+"("+UID+"));";
 
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
         private static final String DROP_TABLE_DETAILS = "DROP TABLE IF EXISTS " + TABLE_NAME_DETAILS;
