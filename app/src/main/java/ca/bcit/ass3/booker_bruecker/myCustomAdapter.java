@@ -1,6 +1,7 @@
 package ca.bcit.ass3.booker_bruecker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,8 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle buttons and add onClickListeners
         Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-        Button addBtn = (Button)view.findViewById(R.id.add_btn);
+        Button editBtn = (Button)view.findViewById(R.id.add_btn);
+        TextView event = (TextView)view.findViewById(R.id.list_item_string);
 
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -67,11 +69,22 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
                 notifyDataSetChanged();
             }
         });
-        addBtn.setOnClickListener(new View.OnClickListener(){
+        editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 //do something
                 notifyDataSetChanged();
+            }
+        });
+        event.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, EventDetails.class);
+                View parent = (View) v.getParent();
+                TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
+                String id = "" + tv.getText().charAt(0);
+                i.putExtra("EventID",id);
+                context.startActivity(i);
             }
         });
 

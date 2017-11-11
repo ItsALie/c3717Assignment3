@@ -15,30 +15,6 @@ public class myDbAdapter {
         myhelper = new myDbHelper(context);
     }
 
-    public boolean isTableExists(String tableName, boolean openDb) {
-        SQLiteDatabase dbb = myhelper.getReadableDatabase();
-        if(openDb) {
-            if(dbb == null || !dbb.isOpen()) {
-                dbb = myhelper.getReadableDatabase();
-            }
-
-            if(!dbb.isReadOnly()) {
-                dbb.close();
-                dbb = myhelper.getReadableDatabase();
-            }
-        }
-
-        Cursor cursor = dbb.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"+tableName+"'", null);
-        if(cursor!=null) {
-            if(cursor.getCount()>0) {
-                cursor.close();
-                return true;
-            }
-            cursor.close();
-        }
-        return false;
-    }
-
     public long insertEvent(String name, String date, String time) {
         SQLiteDatabase dbb = myhelper.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -94,11 +70,20 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
-    public int delete(String uname) {
+    public int delete(String eventID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
-        String[] whereArgs = {uname};
+        String[] whereArgs = {eventID};
 
         int count = db.delete(myDbHelper.TABLE_NAME, myDbHelper.UID + " = ?", whereArgs);
+        count += db.delete(myDbHelper.TABLE_NAME_DETAILS, myDbHelper.EVENT_ID + " = ?", whereArgs);
+        return count;
+    }
+
+    public int deleteDetails(String eventDetailID) {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        String[] whereArgs = {eventDetailID};
+
+        int count = db.delete(myDbHelper.TABLE_NAME_DETAILS, myDbHelper.UID + " = ?", whereArgs);
         return count;
     }
 

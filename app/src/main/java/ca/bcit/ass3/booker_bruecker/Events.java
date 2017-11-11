@@ -28,8 +28,6 @@ import java.util.List;
 public class Events extends AppCompatActivity {
     myDbAdapter helper;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,18 +44,6 @@ public class Events extends AppCompatActivity {
 
         myCustomAdapter adapter = new myCustomAdapter(itemList, this);
         listOfEvents.setAdapter(adapter);
-
-        listOfEvents.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-            {
-                String itemname = itemList.get(position);
-                Intent i = new Intent(Events.this, EventDetails.class);
-                i.putExtra("EventID", "" + itemname.charAt(0));
-                startActivity(i);
-            }
-        });
     }
 
     @Override
