@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".AddEvent" />
         <activity android:name=".EventDetails" />
-        <activity android:name=".AddEventDetails"></activity>
+        <activity android:name=".AddEventDetails" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

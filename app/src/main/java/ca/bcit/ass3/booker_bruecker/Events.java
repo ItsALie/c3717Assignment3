@@ -60,8 +60,11 @@ public class Events extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_event:
-                Intent i = new Intent(Events.this, AddEvent.class);
-                startActivity(i);
+                Intent addEventIntent = new Intent(Events.this, AddEvent.class);
+                startActivity(addEventIntent);
+            case R.id.search_events:
+                Intent searchIntent = new Intent(Events.this, SearchActivity.class);
+                startActivity(searchIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
