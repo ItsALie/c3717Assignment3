@@ -30,22 +30,17 @@ public class EventDetails extends AppCompatActivity {
         ListView listOfEvents = (ListView) findViewById(R.id.list_event_details);
         prevIntent = getIntent();
         String eventID = prevIntent.getStringExtra("EventID");
+        Toast.makeText(getApplicationContext(), "" + eventID, Toast.LENGTH_LONG).show();
+
         helper = new myDbAdapter(this);
 
         List<String> itemList = Arrays.asList(helper.getDetailData(eventID).split("\n"));
         System.out.println(itemList);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, itemList);
-        listOfEvents.setAdapter(arrayAdapter);
-
-        listOfEvents.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
-            {
-                Toast.makeText(EventDetails.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(helper.getDetailData(eventID).length() != 0) {
+            CustomDetailAdapter adapter = new CustomDetailAdapter(itemList, this, eventID);
+            listOfEvents.setAdapter(adapter);
+        }
     }
 
     @Override

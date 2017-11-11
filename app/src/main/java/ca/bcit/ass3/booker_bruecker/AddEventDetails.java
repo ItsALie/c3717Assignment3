@@ -35,7 +35,6 @@ public class AddEventDetails extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Insertion Unsuccessful", Toast.LENGTH_LONG).show();
             } else
             {
-                Toast.makeText(getApplicationContext(), "Insertion Successful", Toast.LENGTH_LONG).show();
                 name.setText("");
                 unit.setText("");
                 quantity.setText("");

@@ -79,6 +79,21 @@ public class myDbAdapter {
         return count;
     }
 
+    public String getEventID(String detailID) {
+        String[] whereArgs = new String[] {
+                detailID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.EVENT_ID};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, columns, myDbHelper.UID + "=?", whereArgs, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            int cid = cursor.getInt(cursor.getColumnIndex(myDbHelper.EVENT_ID));
+            buffer.append("" + cid);
+        }
+        return buffer.toString();
+    }
     public int deleteDetails(String eventDetailID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] whereArgs = {eventDetailID};
