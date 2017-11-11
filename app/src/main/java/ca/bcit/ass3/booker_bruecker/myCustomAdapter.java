@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class myCustomAdapter extends BaseAdapter implements ListAdapter {
@@ -42,7 +43,7 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -56,7 +57,7 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
         //Handle buttons and add onClickListeners
         Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
         Button editBtn = (Button)view.findViewById(R.id.add_btn);
-        TextView event = (TextView)view.findViewById(R.id.list_item_string);
+        final TextView event = (TextView)view.findViewById(R.id.list_item_string);
 
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -67,6 +68,10 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
                 String id = "" + tv.getText().charAt(0);
                 helper.delete(id);
                 notifyDataSetChanged();
+                Intent i = new Intent(context, Events.class);
+                i.putExtra("EventID",id);
+                context.startActivity(i);
+
             }
         });
         editBtn.setOnClickListener(new View.OnClickListener(){

@@ -41,9 +41,11 @@ public class Events extends AppCompatActivity {
         helper = new myDbAdapter(this);
 
         final List<String> itemList = Arrays.asList(helper.getData().split("\n"));
-
-        myCustomAdapter adapter = new myCustomAdapter(itemList, this);
-        listOfEvents.setAdapter(adapter);
+        //Toast.makeText(getApplicationContext(), " " + helper.getData().length(), Toast.LENGTH_LONG).show();
+        if(helper.getData().length() != 0) {
+            myCustomAdapter adapter = new myCustomAdapter(itemList, this);
+            listOfEvents.setAdapter(adapter);
+        }
     }
 
     @Override

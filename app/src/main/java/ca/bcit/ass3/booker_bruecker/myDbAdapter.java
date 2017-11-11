@@ -100,7 +100,7 @@ public class myDbAdapter {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name
         private static final String TABLE_NAME_DETAILS = "EVENT_DETAILS";   // Table Name
-        private static final int DATABASE_Version = 8;    // Database Version
+        private static final int DATABASE_Version = 9;    // Database Version
 
         private static final String UID = "_id";     // Column I (Primary Key)
         private static final String NAME = "Name";    //Column II

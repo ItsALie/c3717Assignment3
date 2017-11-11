@@ -35,11 +35,10 @@ public class AddEvent extends AppCompatActivity {
         {
             long id = helper.insertEvent(name.getText().toString(),date.getText().toString(), time.getText().toString());
             if(id<=0)
-            {
-                Toast.makeText(getApplicationContext(), "Insertion Unsuccessful", Toast.LENGTH_LONG).show();
+            {                Toast.makeText(getApplicationContext(), "Insertion Unsuccessful", Toast.LENGTH_LONG).show();
+
             } else
             {
-                Toast.makeText(getApplicationContext(), "Insertion Successful", Toast.LENGTH_LONG).show();
                 name.setText("");
                 date.setText("");
                 time.setText("");
