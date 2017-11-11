@@ -91,7 +91,6 @@ public class myDbAdapter {
             String quantity = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_QUAN));
             buffer.append(cid + "   " + name + "   " + unit + " " + quantity + " \n");
         }
-        System.out.println(buffer.toString());
         return buffer.toString();
     }
 
@@ -99,7 +98,7 @@ public class myDbAdapter {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] whereArgs = {uname};
 
-        int count = db.delete(myDbHelper.TABLE_NAME, myDbHelper.NAME + " = ?", whereArgs);
+        int count = db.delete(myDbHelper.TABLE_NAME, myDbHelper.UID + " = ?", whereArgs);
         return count;
     }
 

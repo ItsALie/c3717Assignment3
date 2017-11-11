@@ -41,10 +41,8 @@ public class Events extends AppCompatActivity {
         this.setSupportActionBar(toolbar);
 
         helper = new myDbAdapter(this);
-        System.out.println(helper.getData());
 
         final List<String> itemList = Arrays.asList(helper.getData().split("\n"));
-        System.out.println(itemList);
 
         myCustomAdapter adapter = new myCustomAdapter(itemList, this);
         listOfEvents.setAdapter(adapter);

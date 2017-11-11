@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,10 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 //do something
-                helper.delete();
+                View parent = (View) v.getParent();
+                TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
+                String id = "" + tv.getText().charAt(0);
+                helper.delete(id);
                 notifyDataSetChanged();
             }
         });
