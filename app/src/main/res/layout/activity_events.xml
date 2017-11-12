@@ -10,6 +10,14 @@
 
     <include layout="@layout/events_toolbar" android:id="@+id/toolbar"/>
 
+    <TextView
+        android:id="@+id/studentNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/student_names"
+        android:gravity="center"
+        android:textSize="18sp"/>
+
     <ListView
         android:id="@+id/list_events"
         android:layout_width="match_parent"
