@@ -96,7 +96,7 @@ public class myDbAdapter {
         count += db.delete(myDbHelper.TABLE_NAME_DETAILS, myDbHelper.EVENT_ID + " = ?", whereArgs);
         return count;
     }
-    
+
     public int deleteDetails(String eventDetailID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] whereArgs = {eventDetailID};
