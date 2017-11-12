@@ -51,6 +51,24 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
+    public String getNameSearch(String searchString) {
+        String[] whereArgs = new String[] {
+                searchString
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.NAME, myDbHelper.DATE, myDbHelper.TIME};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, myDbHelper.NAME + "=?", whereArgs, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            int cid = cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));
+            String name = cursor.getString(cursor.getColumnIndex(myDbHelper.NAME));
+            String date = cursor.getString(cursor.getColumnIndex(myDbHelper.DATE));
+            String time = cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
+            buffer.append(cid + "   " + name + "   " + date + " " + time + " \n");
+        }
+        return buffer.toString();
+    }
+
     public String getDetailData(String eventID) {
         String[] whereArgs = new String[] {
                 eventID
@@ -94,6 +112,7 @@ public class myDbAdapter {
         }
         return buffer.toString();
     }
+
     public int deleteDetails(String eventDetailID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] whereArgs = {eventDetailID};

@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/search"
+        android:title="@string/search_title"
+        android:icon="@drawable/magnifyericon"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+
     <item
         android:id="@+id/add_event"
         android:checkable="false"
@@ -9,12 +15,5 @@
         android:icon="@drawable/staricon"
         android:title="Add Events"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/search_events"
-        android:icon="@drawable/magnifyericon"
-        android:title="Search"
-        android:orderInCategory="2"
-        app:showAsAction="ifRoom"
-        />
 
 </menu>

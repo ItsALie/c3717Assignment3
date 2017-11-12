@@ -1,6 +1,8 @@
 package ca.bcit.ass3.booker_bruecker;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -53,6 +56,16 @@ public class Events extends AppCompatActivity {
         // Inflate the menu. This adds items to the app bar.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
+
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,9 +75,6 @@ public class Events extends AppCompatActivity {
             case R.id.add_event:
                 Intent addEventIntent = new Intent(Events.this, AddEvent.class);
                 startActivity(addEventIntent);
-            case R.id.search_events:
-                Intent searchIntent = new Intent(Events.this, SearchActivity.class);
-                startActivity(searchIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
