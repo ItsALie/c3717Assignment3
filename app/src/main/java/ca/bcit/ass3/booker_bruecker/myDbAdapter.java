@@ -53,11 +53,11 @@ public class myDbAdapter {
 
     public String getNameSearch(String searchString) {
         String[] whereArgs = new String[] {
-                searchString
+               "%" + searchString + "%"
         };
         SQLiteDatabase db = myhelper.getReadableDatabase();
         String[] columns = {myDbHelper.UID, myDbHelper.NAME, myDbHelper.DATE, myDbHelper.TIME};
-        Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, myDbHelper.NAME + "=?", whereArgs, null, null, null);
+        Cursor cursor = db.query(true, myDbHelper.TABLE_NAME, columns, myDbHelper.NAME + " LIKE ?", whereArgs, null, null, null, null);
         StringBuffer buffer = new StringBuffer();
         while (cursor.moveToNext()) {
             int cid = cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));

@@ -18,12 +18,13 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        ListView listOfEvents = (ListView) findViewById(R.id.list_events);
+        ListView listOfEvents = (ListView) findViewById(R.id.list_events_searched);
         helper = new myDbAdapter(this);
 
         String searchQuery = getIntent().getStringExtra(SearchManager.QUERY);
 
         final List<String> itemList = Arrays.asList(helper.getNameSearch(searchQuery).split("\n"));
+        System.out.println(itemList.toString());
 
         if(helper.getNameSearch(searchQuery).length() != 0) {
             myCustomAdapter adapter = new myCustomAdapter(itemList, this);
