@@ -4,6 +4,19 @@
         android:id="@+id/add_event_details"
         android:checkable="false"
         android:orderInCategory="1"
-        android:title="Add Events Details"
+        android:title="@string/add_events_details"
      />
+    <item
+        android:id="@+id/edit_event"
+        android:checkable="false"
+        android:orderInCategory="2"
+        android:title="@string/edit_event"
+        />
+    <item
+        android:id="@+id/delete_event"
+        android:checkable="false"
+        android:orderInCategory="3"
+        android:title="@string/delete_event"
+        />
+
 </menu>

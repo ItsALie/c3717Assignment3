@@ -9,11 +9,15 @@ import android.widget.Toast;
 
 public class AddEventDetails extends AppCompatActivity {
     myDbAdapter helper;
+    String eventID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_details);
         helper = new myDbAdapter(this);
+        Intent intent = getIntent();
+        String eventID  = intent.getStringExtra("EventID");
+        this.eventID = eventID;
     }
 
     public void onAdd(View v){
@@ -21,8 +25,6 @@ public class AddEventDetails extends AppCompatActivity {
         EditText unit = (EditText)findViewById(R.id.EditEventUnits);
         EditText quantity = (EditText)findViewById(R.id.EditEventQuantity);
         helper = new myDbAdapter(getApplicationContext());
-        Intent intent = getIntent();
-        String eventID  = intent.getStringExtra("EventID");
         if(name.getText() == null || unit.getText() == null || quantity.getText() == null || eventID == null)
         {
             Toast.makeText(getApplicationContext(), "Enter Both Name and Date and Time", Toast.LENGTH_LONG).show();
@@ -40,7 +42,11 @@ public class AddEventDetails extends AppCompatActivity {
                 quantity.setText("");
             }
         }
-
+        Intent i = new Intent(this, EventDetails.class);
+        i.putExtra("EventID", eventID);
+        startActivity(i);
+    }
+    public void goBack(View v) {
         Intent i = new Intent(this, EventDetails.class);
         i.putExtra("EventID", eventID);
         startActivity(i);

@@ -9,6 +9,13 @@
 
     <include layout="@layout/events_toolbar" android:id="@+id/toolbar"/>
 
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goBack"
+        android:text="@string/back_btn" />
+
     <ListView
         android:id="@+id/list_event_details"
         android:layout_width="match_parent"
