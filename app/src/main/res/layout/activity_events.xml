@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass3.booker_bruecker.Events"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorBG">
 
     <include layout="@layout/events_toolbar" android:id="@+id/toolbar"/>
 

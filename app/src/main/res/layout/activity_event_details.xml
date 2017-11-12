@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ca.bcit.ass3.booker_bruecker.EventDetails"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorBG">
 
     <include layout="@layout/events_toolbar" android:id="@+id/toolbar"/>
 
     <Button
         android:id="@+id/backBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="goBack"
-        android:text="@string/back_btn" />
+        android:text="@string/back_btn"
+        android:background="@color/colorPrimary"/>
 
     <ListView
         android:id="@+id/list_event_details"
