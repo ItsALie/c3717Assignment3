@@ -66,23 +66,27 @@ public class CustomDetailAdapter extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
-                View parent = (View) v.getParent();
-                TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
-                String id = "" + tv.getText().charAt(0);
-                helper.deleteDetails(id);
-                notifyDataSetChanged();
-                Intent i = new Intent(context, EventDetails.class);
-                i.putExtra("EventID",eventID);
-                context.startActivity(i);
-
+            //do something
+            View parent = (View) v.getParent();
+            TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
+            String id = "" + tv.getText().charAt(0);
+            helper.deleteDetails(id);
+            notifyDataSetChanged();
+            Intent i = new Intent(context, EventDetails.class);
+            i.putExtra("EventID",eventID);
+            context.startActivity(i);
             }
         });
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
-                notifyDataSetChanged();
+            View parent = (View) v.getParent();
+            TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
+            String id = "" + tv.getText().charAt(0);
+            Intent i = new Intent(context, EditEventDetails.class);
+            i.putExtra("EventID",eventID);
+            i.putExtra("EventDetailsID",id);
+            context.startActivity(i);
             }
         });
         return view;

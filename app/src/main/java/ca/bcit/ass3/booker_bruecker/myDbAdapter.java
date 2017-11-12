@@ -96,14 +96,66 @@ public class myDbAdapter {
         return count;
     }
 
-    public int updateDetails(String oldName, String newName) {
+    public int updateDetails(String eventDetailID, String name, String unit, String quantity, String eventID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.NAME, newName);
-        String[] whereArgs = {oldName};
-        int count = db.update(myDbHelper.TABLE_NAME, contentValues, myDbHelper.NAME + " = ?", whereArgs);
+        contentValues.put(myDbHelper.ITEM_NAME, name);
+        contentValues.put(myDbHelper.ITEM_UNIT, unit);
+        contentValues.put(myDbHelper.ITEM_QUAN, quantity);
+        contentValues.put(myDbHelper.EVENT_ID, eventID);
+        String[] whereArgs = {eventDetailID};
+        int count = db.update(myDbHelper.TABLE_NAME_DETAILS, contentValues, myDbHelper.UID + " = ?", whereArgs);
         return count;
     }
+
+    public String getItemName(String eventDetailsID) {
+        String[] whereArgs = new String[] {
+                eventDetailsID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_NAME};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, columns, myDbHelper.UID + "=?", whereArgs, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_NAME));
+            buffer.append("" + name);
+        }
+        return buffer.toString();
+    }
+
+    public String getItemUnit(String eventDetailsID) {
+        String[] whereArgs = new String[] {
+                eventDetailsID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_UNIT};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, columns, myDbHelper.UID + "=?", whereArgs, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            String unit = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_UNIT));
+            buffer.append("" + unit);
+        }
+        return buffer.toString();
+    }
+
+    public String getItemQuantity(String eventDetailsID) {
+        String[] whereArgs = new String[] {
+                eventDetailsID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.ITEM_QUAN};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME_DETAILS, columns, myDbHelper.UID + "=?", whereArgs, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+
+        while (cursor.moveToNext()) {
+            String quantity = cursor.getString(cursor.getColumnIndex(myDbHelper.ITEM_QUAN));
+            buffer.append("" + quantity);
+        }
+        return buffer.toString();
+    }
+
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name

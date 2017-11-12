@@ -62,17 +62,19 @@ public class EventDetails extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.add_event_details:
                 i = new Intent(EventDetails.this, AddEventDetails.class);
-                i.putExtra("EventID", prevIntent.getStringExtra("EventID"));
+                i.putExtra("EventID", eventID);
                 startActivity(i);
+                break;
             case R.id.edit_event:
                 i = new Intent(EventDetails.this, Events.class);
+                i.putExtra("EventID", eventID);
                 startActivity(i);
                 break;
             case R.id.delete_event:
                 helper.delete(eventID);
                 i = new Intent(EventDetails.this, Events.class);
-                i.putExtra("EventID", eventID);
                 startActivity(i);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
