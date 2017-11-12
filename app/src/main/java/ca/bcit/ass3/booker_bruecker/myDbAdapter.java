@@ -51,6 +51,24 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
+    public String getNameSearch(String searchString) {
+        String[] whereArgs = new String[] {
+               "%" + searchString + "%"
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.NAME, myDbHelper.DATE, myDbHelper.TIME};
+        Cursor cursor = db.query(true, myDbHelper.TABLE_NAME, columns, myDbHelper.NAME + " LIKE ?", whereArgs, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            int cid = cursor.getInt(cursor.getColumnIndex(myDbHelper.UID));
+            String name = cursor.getString(cursor.getColumnIndex(myDbHelper.NAME));
+            String date = cursor.getString(cursor.getColumnIndex(myDbHelper.DATE));
+            String time = cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
+            buffer.append(cid + "   " + name + "   " + date + " " + time + " \n");
+        }
+        return buffer.toString();
+    }
+
     public String getDetailData(String eventID) {
         String[] whereArgs = new String[] {
                 eventID
@@ -78,21 +96,12 @@ public class myDbAdapter {
         count += db.delete(myDbHelper.TABLE_NAME_DETAILS, myDbHelper.EVENT_ID + " = ?", whereArgs);
         return count;
     }
-
+    
     public int deleteDetails(String eventDetailID) {
         SQLiteDatabase db = myhelper.getWritableDatabase();
         String[] whereArgs = {eventDetailID};
 
         int count = db.delete(myDbHelper.TABLE_NAME_DETAILS, myDbHelper.UID + " = ?", whereArgs);
-        return count;
-    }
-
-    public int updateName(String oldName, String newName) {
-        SQLiteDatabase db = myhelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(myDbHelper.NAME, newName);
-        String[] whereArgs = {oldName};
-        int count = db.update(myDbHelper.TABLE_NAME, contentValues, myDbHelper.NAME + " = ?", whereArgs);
         return count;
     }
 

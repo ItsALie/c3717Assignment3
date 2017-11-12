@@ -9,6 +9,8 @@
     <string name="add_event_details_btn">Add Event Details</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="search_title">Search</string>
+    <string name="search_hint">Event name</string>
     <string name="back_btn">Back</string>
     <string name="add_events_details">Add Events Details</string>
     <string name="edit_event">Edit Event</string>

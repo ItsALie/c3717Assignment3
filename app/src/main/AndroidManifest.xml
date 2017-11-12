@@ -19,8 +19,22 @@
         <activity android:name=".AddEvent" />
         <activity android:name=".EventDetails" />
         <activity android:name=".AddEventDetails" />
+<<<<<<< HEAD
         <activity android:name=".SearchActivity" />
         <activity android:name=".EditEventDetails"></activity>
+=======
+        <activity android:name=".SearchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchActivity" />
+>>>>>>> 514cc1e45b23842d5b869a0ba35b288fa9b97433
     </application>
 
 </manifest>
