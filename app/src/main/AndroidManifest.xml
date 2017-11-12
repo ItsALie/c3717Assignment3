@@ -15,16 +15,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".AddEvent" />
+        <activity android:name=".EventDetails" />
+        <activity android:name=".AddEventDetails" />
+        <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".AddEvent" />
-        <activity android:name=".EventDetails" />
-        <activity android:name=".AddEventDetails" />
-        <activity android:name=".SearchActivity"></activity>
+
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".SearchActivity" />
     </application>
 
 </manifest>
