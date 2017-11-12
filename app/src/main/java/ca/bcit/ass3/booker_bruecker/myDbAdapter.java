@@ -225,7 +225,7 @@ public class myDbAdapter {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name
         private static final String TABLE_NAME_DETAILS = "EVENT_DETAILS";   // Table Name
-        private static final int DATABASE_Version = 9;    // Database Version
+        private static final int DATABASE_Version = 12;    // Database Version
 
         private static final String UID = "_id";     // Column I (Primary Key)
         private static final String NAME = "Name";    //Column II
@@ -257,6 +257,67 @@ public class myDbAdapter {
             try {
                 db.execSQL(CREATE_TABLE);
                 db.execSQL(CREATE_TABLE_DETAIL);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(myDbHelper.NAME, "Christmas Potluck");
+                contentValues.put(myDbHelper.DATE, "12.25.17");
+                contentValues.put(myDbHelper.TIME, "6:30");
+                long id = db.insert(myDbHelper.TABLE_NAME, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Paper Plates");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Pieces");
+                contentValues.put(myDbHelper.ITEM_QUAN, "20");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Paper Cups");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Pieces");
+                contentValues.put(myDbHelper.ITEM_QUAN, "20");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Napkins");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Pieces");
+                contentValues.put(myDbHelper.ITEM_QUAN, "100");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Paper Plates");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Pieces");
+                contentValues.put(myDbHelper.ITEM_QUAN, "20");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Beer");
+                contentValues.put(myDbHelper.ITEM_UNIT, "6 Pack");
+                contentValues.put(myDbHelper.ITEM_QUAN, "5");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Pop");
+                contentValues.put(myDbHelper.ITEM_UNIT, "2 Liter Bottles");
+                contentValues.put(myDbHelper.ITEM_QUAN, "3");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Pizza");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Large");
+                contentValues.put(myDbHelper.ITEM_QUAN, "3");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
+
+                contentValues = new ContentValues();
+                contentValues.put(myDbHelper.ITEM_NAME, "Peanuts");
+                contentValues.put(myDbHelper.ITEM_UNIT, "Grams");
+                contentValues.put(myDbHelper.ITEM_QUAN, "200");
+                contentValues.put(myDbHelper.EVENT_ID, id);
+                db.insert(myDbHelper.TABLE_NAME_DETAILS, null, contentValues);
             } catch (Exception e) {
                 Toast.makeText(context, "" + e, Toast.LENGTH_LONG).show();
             }
