@@ -165,6 +165,62 @@ public class myDbAdapter {
         return buffer.toString();
     }
 
+    public String getName(String eventID) {
+        String[] whereArgs = new String[] {
+                eventID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.NAME};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, myDbHelper.UID + "=?", whereArgs, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex(myDbHelper.NAME));
+            buffer.append("" + name);
+        }
+        return buffer.toString();
+    }
+
+    public String getDate(String eventID) {
+        String[] whereArgs = new String[] {
+                eventID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.DATE};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, myDbHelper.UID + "=?", whereArgs, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            String date = cursor.getString(cursor.getColumnIndex(myDbHelper.DATE));
+            buffer.append("" + date);
+        }
+        return buffer.toString();
+    }
+
+    public String getTime(String eventID) {
+        String[] whereArgs = new String[] {
+                eventID
+        };
+        SQLiteDatabase db = myhelper.getReadableDatabase();
+        String[] columns = {myDbHelper.UID, myDbHelper.TIME};
+        Cursor cursor = db.query(myDbHelper.TABLE_NAME, columns, myDbHelper.UID + "=?", whereArgs, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()) {
+            String time = cursor.getString(cursor.getColumnIndex(myDbHelper.TIME));
+            buffer.append("" + time);
+        }
+        return buffer.toString();
+    }
+
+    public int updateEvent(String eventID, String name, String date, String time) {
+        SQLiteDatabase db = myhelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(myDbHelper.NAME, name);
+        contentValues.put(myDbHelper.DATE, date);
+        contentValues.put(myDbHelper.TIME, time);
+        String[] whereArgs = {eventID};
+        int count = db.update(myDbHelper.TABLE_NAME, contentValues, myDbHelper.UID + " = ?", whereArgs);
+        return count;
+    }
+
     static class myDbHelper extends SQLiteOpenHelper {
         private static final String DATABASE_NAME = "EVENTS";    // Database Name
         private static final String TABLE_NAME = "EVENTS";   // Table Name

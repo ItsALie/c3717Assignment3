@@ -77,8 +77,12 @@ public class myCustomAdapter extends BaseAdapter implements ListAdapter {
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
-                notifyDataSetChanged();
+                View parent = (View) v.getParent();
+                TextView tv = (TextView) parent.findViewById(R.id.list_item_string);
+                String id = "" + tv.getText().charAt(0);
+                Intent i = new Intent(context, EditEvent.class);
+                i.putExtra("EventID",id);
+                context.startActivity(i);
             }
         });
         event.setOnClickListener(new View.OnClickListener(){
