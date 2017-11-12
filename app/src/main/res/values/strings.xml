@@ -16,4 +16,5 @@
     <string name="edit_event">Edit Event</string>
     <string name="delete_event">Delete Event</string>
     <string name="update_event_details">Update Details</string>
+    <string name="update_event">Update Event</string>
 </resources>

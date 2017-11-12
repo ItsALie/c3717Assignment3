@@ -72,9 +72,9 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/AddEventBtn"
+        android:id="@+id/UpdateEventBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onAdd"
-        android:text="@string/add_event_btn" />
+        android:onClick="onUpdate"
+        android:text="@string/update_event" />
 </LinearLayout>

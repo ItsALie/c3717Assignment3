@@ -35,6 +35,7 @@ public class EditEventDetails extends AppCompatActivity {
         TextView quantity = (TextView)findViewById(R.id.EditEventQuantity);
         quantity.setText(itemQuantity);
     }
+
     public void onUpdate(View v){
         EditText name = (EditText)findViewById(R.id.EditEventName);
         EditText unit = (EditText)findViewById(R.id.EditEventUnits);
